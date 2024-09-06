@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,10 +17,21 @@ namespace EUtazas2020
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Utazas> utazasok = new();
         public MainWindow()
         {
             InitializeComponent();
-            List<string> utazasok = new();
+
+            using StreamReader sr = new(
+                path: @"..\..\..\src\utasadat.txt",
+                encoding: Encoding.UTF8
+                );
+            while (!sr.EndOfStream)
+            {
+                utazasok.Add(new Utazas(sr.ReadLine()));
+            }
+            sr.Close();
+
         }
     }
 }

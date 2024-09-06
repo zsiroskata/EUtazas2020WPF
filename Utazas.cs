@@ -7,7 +7,7 @@ using System.Windows.Xps.Serialization;
 
 namespace EUtazas2020
 {
-    internal class Utozas
+    internal class Utazas
     {
         public int Sorszam { get; set; }
         public string Datum { get; set; }
@@ -18,7 +18,7 @@ namespace EUtazas2020
 
         public int Ervenyesseg { get; set; }
 
-        public Utozas(string sorok)
+        public Utazas(string sorok)
         {
             var sor = sorok.Split(' ');
             Sorszam = Convert.ToInt32(sor[0]);

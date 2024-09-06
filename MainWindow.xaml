@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EUtazas2020"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Új felszállás" Height="350" Width="500">
+    <Grid Margin="10">
+        <Label Content="Megálló sorszáma:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox x:Name="megalloCb" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="150,0,0,0" Height="23">
+            <ComboBoxItem Content="Válasszon megállót!"/>
+        </ComboBox>
 
+        <Label Content="Felszállás dátuma:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0"/>
+        <DatePicker x:Name="naptar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,40,0,0" Width="150"/>
+
+        <Label Content="Felszállás időpontja [óó:pp]:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,80,0,0"/>
+        <TextBox x:Name="IdoTxt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,80,0,0" Width="150"/>
+
+        <Label Content="Kártya azonosítója:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,120,0,0"/>
+        <TextBox x:Name="IDTxt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,120,0,0" Width="150"/>
+
+        <Label Content="Bérlet típusa:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,160,0,0"/>
+        <ComboBox x:Name="jegyCb" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="150,160,0,0" Height="23">
+            <ComboBoxItem Content="Válasszon típust!"/>
+            <!-- Add more items for ticket types here -->
+        </ComboBox>
+
+        <Label Content="Bérlet érvényességi ideje:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,200,0,0"/>
+        <DatePicker x:Name="berletNaptar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,200,0,0" Width="150"/>
+
+        <Label Content="Bérlet vagy Jegy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,0,0,0"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,20,0,0">
+            <RadioButton x:Name="berlet" Content="Bérlet" IsChecked="True"/>
+            <RadioButton x:Name="jegy" Content="Jegy"/>
+        </StackPanel>
+
+        <Button x:Name="gomb" Content="Adatok ellenőrzése és rögzítése" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,250,0,0" Width="300"/>
     </Grid>
 </Window>
