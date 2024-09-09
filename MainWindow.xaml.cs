@@ -32,6 +32,40 @@ namespace EUtazas2020
             }
             sr.Close();
 
+            foreach (var item in utazasok)
+            {
+                if (!megalloCb.Items.Contains(item.Sorszam))
+                {
+                    megalloCb.Items.Add(item.Sorszam);
+                }
+            }
+
+            foreach (var item in utazasok)
+            {
+                if (!jegyCb.Items.Contains(item.JegyTipus))
+                {
+                    jegyCb.Items.Add(item.JegyTipus);
+                }
+            }
+
+        }
+
+        private void IDTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            IDTxt.MaxLength = 7;
+        }
+
+        private void jegy_Checked(object sender, RoutedEventArgs e)
+        {
+
+            if (berlet.IsChecked == true)
+            {
+                jegyBerlet.Content = "Bérlet";
+            }
+            else
+            {
+                jegyBerlet.Content = "Jegy";
+            }
         }
     }
 }
