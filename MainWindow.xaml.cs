@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -53,6 +54,15 @@ namespace EUtazas2020
         private void IDTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             IDTxt.MaxLength = 7;
+            
+            if (string.IsNullOrEmpty(IDTxt.Text) ) 
+            {
+                MessageBox.Show("Nincs be írva az azonosító!");
+            }
+            else if (IDTxt.Text.Length < 7)
+            {
+                MessageBox.Show("Nem 7 karakterből áll az azonosító!");
+            }
         }
 
         private void jegy_Checked(object sender, RoutedEventArgs e)
@@ -60,12 +70,31 @@ namespace EUtazas2020
 
             if (berlet.IsChecked == true)
             {
-                jegyBerlet.Content = "Bérlet";
+                jegyBerlet.Content = "Bérlet típusa";
+            }
+            else if (jegy.IsChecked == true)
+            {
+                jegyBerlet.Content = "Jegy típusa";
             }
             else
             {
-                jegyBerlet.Content = "Jegy";
+                MessageBox.Show("Nem választottad ki, hogy milyen tipusú jegyed van!");
             }
+            
         }
+
+        private void gomb_Click(object sender, RoutedEventArgs e)
+        {
+            jegy_Checked(sender, e);
+            
+            if (megalloCb.SelectedItem== null)
+            {
+                MessageBox.Show("Nincs kiválasztva a megálló!");
+            }
+
+           
+        }
+
+    
     }
 }
