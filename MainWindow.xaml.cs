@@ -48,18 +48,23 @@ namespace EUtazas2020
                     jegyCb.Items.Add(item.JegyTipus);
                 }
             }
+            berletAdatok.Visibility = Visibility.Collapsed;
+
 
         }
 
         private void jegy_Checked(object sender, RoutedEventArgs e)
         {
-
             if (berlet.IsChecked == true)
             {
+                berletAdatok.Visibility = Visibility.Visible;
+                jegyAdatok.Visibility = Visibility.Collapsed;
                 jegyBerlet.Content = "Bérlet típusa";
             }
             else if (jegy.IsChecked == true)
             {
+                jegyAdatok.Visibility = Visibility.Visible;
+                berletAdatok.Visibility = Visibility.Collapsed;
                 jegyBerlet.Content = "Jegy típusa";
             }
             else
@@ -77,8 +82,6 @@ namespace EUtazas2020
                 MessageBox.Show("Nincs kiválasztva a megálló!");
             }
 
-
-
             //azonosító 
             int idSzam;
             bool sikeres = int.TryParse(IDTxt.Text, out idSzam);
@@ -94,31 +97,68 @@ namespace EUtazas2020
                 
                 MessageBox.Show("Nincs be írva az azonosító!");
             }
+         
             IDTxt.MaxLength = 7;
-
             if (IDTxt.Text.Length < 7)
             {
                 MessageBox.Show("Nem 7 karakterből áll az azonosító!");
             }
-          
-            
 
+            // I D Ő
+            if (string.IsNullOrWhiteSpace(IdoTxt.Text))
+            {
+                MessageBox.Show("Nem adott meg időt!");
+            }
+            if (IdoTxt.Text.Length < 5)
+            {
+                MessageBox.Show("Helytelen időpont formátum.");
+            }
+
+            // D Á T U M
+            if (berletNaptar.SelectedDate == null)
+            {
+                MessageBox.Show("Nem adta meg a bérlet érvényességi idejét!");
+            }
         }
         private void IdoTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var ido =  IdoTxt.Text.Split(":") ;
-            int ora = Convert.ToInt32( ido[0]);
-            int perc = Convert.ToInt32(ido[1]);
-
-            if (ora < 23 && ora > 0)
+            if (IdoTxt.Text.Length ==5)
             {
-                MessageBox.Show("ilyen idő nem létezik");
+                if (IdoTxt.Text.Contains(":"))
+                {
+                    var ido = IdoTxt.Text.Split(':');
+
+                    if (ido.Length == 2 && int.TryParse(ido[0], out int ora) && int.TryParse(ido[1], out int perc))
+                    {
+                        if ((ora >= 0 && ora <= 23) && (perc >= 0 && perc <= 59))
+                        {
+                            MessageBox.Show("Helyes időpont.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Helytelen időpont: az időnek 00:00 és 23:59 között kell lennie.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Helytelen időpont formátum. Az időt óó:pp formátumban adja meg!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Helytelen időpont formátum. Az időt óó:pp formátumban adja meg!");
+                }
             }
-            else if(perc < 59 )
+            else if (IdoTxt.Text.Length > 5)
             {
+                    MessageBox.Show("Helytelen időpont formátum.");
 
             }
-
+        }
+        private void jegySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            // Frissítjük a címke szövegét a csúszka értékével
+            jegyLabel.Content = $"{(int)jegySlider.Value} db";
         }
 
     }

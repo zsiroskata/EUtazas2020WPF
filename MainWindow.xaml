@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:EUtazas2020"
         mc:Ignorable="d"
         Title="eUtazás 2020 – Új felszállás" Height="350" Width="500">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+    </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="121*"/>
@@ -25,22 +28,41 @@
         <Label Content="Kártya azonosítója:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,120,0,0" Grid.RowSpan="2"/>
         <TextBox x:Name="IDTxt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,120,0,0" Width="150" Grid.RowSpan="2" Height="26"/>
 
-        <Label Content="Bérlet típusa" Name="jegyBerlet" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,39,0,0" Width="110" Grid.Row="1"/>
-        <ComboBox x:Name="jegyCb" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="150,39,0,0" Height="23" Grid.Row="1">
-            <ComboBoxItem Content="Válasszon típust!"/>
+        <!-- bérlet adat kezdete -->
 
-        </ComboBox>
+        <StackPanel x:Name="berletAdatok" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,32,0,0" Height="118" Width="179" Grid.Row="1" Grid.Column="2">
+            <Label Content="Bérlet típusa" x:Name="jegyBerlet" Width="178"/>
+            <ComboBox x:Name="jegyCb" Width="150" Height="23">
+                <ComboBoxItem Content="Válasszon típust!"/>
+            </ComboBox>
 
-        <Label Content="Bérlet érvényességi ideje:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,79,0,0" Grid.Row="1"/>
-        <DatePicker x:Name="berletNaptar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,79,0,0" Width="150" Grid.Row="1"/>
-
+            <Label Content="Bérlet érvényességi ideje:"/>
+            <DatePicker x:Name="berletNaptar" Width="150"/>
+        </StackPanel>
+        <!---  bérlet adatok vége  -->
+        
         <Label Content="Bérlet vagy Jegy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,0,0,0"/>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,20,0,0" Height="57" Width="95">
             <RadioButton x:Name="berlet" Content="Bérlet" Checked="jegy_Checked"/>
             <RadioButton x:Name="jegy" Content="Jegy" Checked="jegy_Checked" />
         </StackPanel>
 
-        <Button x:Name="gomb" Content="Adatok ellenőrzése és rögzítése" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,129,0,0" Width="300" Click="gomb_Click" Grid.Row="1"/>
-        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Height="53" Margin="330,12,0,0" VerticalAlignment="Top" Width="95" Background="#FFC5C5C5" Grid.Row="1"/>
+        <Button x:Name="gomb" Content="Adatok ellenőrzése és rögzítése" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,155,0,0" Width="300" Click="gomb_Click" Grid.Row="1"/>
+
+        
+        <Slider x:Name="jegySlider" Minimum="0" Maximum="10" ValueChanged="jegySlider_ValueChanged"
+         HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="322,47,0,0" Height="15" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+
+        <Label x:Name="jegyLabel" Content="0 db" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="330,3,0,0" Height="28" Width="150" Grid.Row="1" />
+
     </Grid>
 </Window>
