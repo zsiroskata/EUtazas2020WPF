@@ -30,7 +30,7 @@
 
         <!-- bérlet adat kezdete -->
 
-        <StackPanel x:Name="berletAdatok" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,32,0,0" Height="118" Width="179" Grid.Row="1" Grid.Column="2">
+        <StackPanel x:Name="berletAdatok" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="158,32,0,0" Height="118" Width="178" Grid.Row="1">
             <Label Content="Bérlet típusa" x:Name="jegyBerlet" Width="178"/>
             <ComboBox x:Name="jegyCb" Width="150" Height="23">
                 <ComboBoxItem Content="Válasszon típust!"/>
@@ -40,7 +40,7 @@
             <DatePicker x:Name="berletNaptar" Width="150"/>
         </StackPanel>
         <!---  bérlet adatok vége  -->
-        
+
         <Label Content="Bérlet vagy Jegy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,0,0,0"/>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,20,0,0" Height="57" Width="95">
             <RadioButton x:Name="berlet" Content="Bérlet" Checked="jegy_Checked"/>
@@ -49,20 +49,12 @@
 
         <Button x:Name="gomb" Content="Adatok ellenőrzése és rögzítése" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,155,0,0" Width="300" Click="gomb_Click" Grid.Row="1"/>
 
-        
-        <Slider x:Name="jegySlider" Minimum="0" Maximum="10" ValueChanged="jegySlider_ValueChanged"
-         HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="322,47,0,0" Height="15" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
-            <Slider.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Slider.RenderTransform>
-        </Slider>
-
-        <Label x:Name="jegyLabel" Content="0 db" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="330,3,0,0" Height="28" Width="150" Grid.Row="1" />
+        <StackPanel x:Name="jegyAdatok" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="116,36,0,0" Height="75" Width="262" Grid.Row="1">
+            <Label Content="Felhasználható jegy:" Height="28" Width="122"/>
+            <Label x:Name="jegyLabel" Content="0 db" FontSize="16" Height="28" Width="48"/>
+            <Slider x:Name="jegySlider" Minimum="0" Maximum="10" 
+                    ValueChanged="jegySlider_ValueChanged" Width="148"/>
+        </StackPanel>
 
     </Grid>
 </Window>

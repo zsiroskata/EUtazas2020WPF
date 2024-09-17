@@ -49,7 +49,7 @@ namespace EUtazas2020
                 }
             }
             berletAdatok.Visibility = Visibility.Collapsed;
-
+            jegyAdatok.Visibility = Visibility.Collapsed;
 
         }
 
@@ -58,7 +58,7 @@ namespace EUtazas2020
             if (berlet.IsChecked == true)
             {
                 berletAdatok.Visibility = Visibility.Visible;
-                jegyAdatok.Visibility = Visibility.Collapsed;
+               jegyAdatok.Visibility = Visibility.Collapsed;
                 jegyBerlet.Content = "Bérlet típusa";
             }
             else if (jegy.IsChecked == true)
@@ -74,12 +74,15 @@ namespace EUtazas2020
             
         }
 
+
         private void gomb_Click(object sender, RoutedEventArgs e)
         {
+            int hiba = 0;
             jegy_Checked(sender, e);
             if (megalloCb.SelectedItem== null)
             {
                 MessageBox.Show("Nincs kiválasztva a megálló!");
+                hiba++;
             }
 
             //azonosító 
@@ -90,34 +93,39 @@ namespace EUtazas2020
                 if (idSzam < 0)
                 {
                     MessageBox.Show("kártya azonosítója nem pozitív egész szám!");
+                    hiba++;
                 }
             }
             else
             {
-                
                 MessageBox.Show("Nincs be írva az azonosító!");
+                hiba++;
             }
-         
+
             IDTxt.MaxLength = 7;
             if (IDTxt.Text.Length < 7)
             {
                 MessageBox.Show("Nem 7 karakterből áll az azonosító!");
+                hiba++;
             }
 
             // I D Ő
             if (string.IsNullOrWhiteSpace(IdoTxt.Text))
             {
                 MessageBox.Show("Nem adott meg időt!");
+                hiba++;
             }
             if (IdoTxt.Text.Length < 5)
             {
                 MessageBox.Show("Helytelen időpont formátum.");
+                hiba++;
             }
 
             // D Á T U M
-            if (berletNaptar.SelectedDate == null)
+            if (berletNaptar.SelectedDate == null && berlet.IsChecked == true)
             {
                 MessageBox.Show("Nem adta meg a bérlet érvényességi idejét!");
+                hiba++;
             }
         }
         private void IdoTxt_TextChanged(object sender, TextChangedEventArgs e)
@@ -157,7 +165,6 @@ namespace EUtazas2020
         }
         private void jegySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Frissítjük a címke szövegét a csúszka értékével
             jegyLabel.Content = $"{(int)jegySlider.Value} db";
         }
 
